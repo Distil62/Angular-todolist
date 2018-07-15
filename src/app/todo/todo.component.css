@@ -1,0 +1,13 @@
+mat-card {
+	text-align: center;
+	margin-top: 48px;
+}
+
+mat-radio-button, mat-form-field {
+	margin: 0 6px 0 6px;
+}
+
+mat-list { 
+	height: 256px;
+	overflow: auto;
+}

@@ -1,0 +1,55 @@
+<mat-card>
+	<mat-card-title>TodoList</mat-card-title>
+	<mat-card-content>
+		<mat-list>
+			<div *ngFor="let todo of todos">
+				<mat-list-item *ngIf="todo.state == this.filter || this.filter == 'all'">
+						<div class="pure-g" style="width: 100%">
+							<div class="pure-u-1-5 valign">
+								<span> <strong>  {{ todo.title }} </strong></span>
+							</div>
+							<div class="pure-u-3-5 valign">
+								<span>{{ todo.content }}</span>
+							</div>
+							<div class="pure-u-1-5 valign">
+								<div class="pure-g valign">
+									<div class="pure-u-1-2 valign">
+										<div *ngIf="todo.state == 'finish'">
+											<mat-checkbox checked="true" (click)="changeState(todo.key)"></mat-checkbox>
+										</div>
+										<div *ngIf="todo.state != 'finish'">
+											<mat-checkbox (click)="changeState(todo.key)"></mat-checkbox>
+										</div>
+									</div>
+									<div class="pure-u-1-2">
+										<button mat-icon-button (click)=removeTodo(todo.key)>
+											<mat-icon style="color:#f44336">clear</mat-icon>
+										</button>
+									</div>
+								</div>
+							</div>
+							<mat-divider></mat-divider>
+						</div>
+				</mat-list-item>
+			</div>
+		</mat-list>
+	</mat-card-content>
+	<button mat-raised-button (click)="clearTodos()">Clear</button>
+	<mat-card-actions>
+		<mat-form-field>
+			<input matInput #title placeholder="Title">
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput #content id="inputContent" placeholder="Content">
+		</mat-form-field>
+		<button mat-raised-button color="primary" (click)="addTodo(title.value, content.value)">
+			<mat-icon>add</mat-icon>
+		</button>
+		<h3>Filter</h3>
+		<mat-radio-group [(ngModel)]="filter">
+			<mat-radio-button value="all" checked>All</mat-radio-button>
+			<mat-radio-button value="finish">Finish</mat-radio-button>
+			<mat-radio-button value="progress">Progress</mat-radio-button>
+		</mat-radio-group>
+	</mat-card-actions>
+</mat-card>
